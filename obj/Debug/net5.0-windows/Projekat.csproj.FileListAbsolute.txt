@@ -16,3 +16,4 @@ C:\Users\anjag\OneDrive\Desktop\skola\skolaSaStarog\DePicto\Projekat\Projekat\ob
 C:\Users\anjag\OneDrive\Desktop\skola\skolaSaStarog\DePicto\Projekat\Projekat\obj\Debug\net5.0-windows\Projekat.pdb
 C:\Users\anjag\OneDrive\Desktop\skola\skolaSaStarog\DePicto\Projekat\Projekat\obj\Debug\net5.0-windows\Projekat.genruntimeconfig.cache
 C:\Users\anjag\OneDrive\Desktop\skola\skolaSaStarog\DePicto\Projekat\Projekat\obj\Debug\net5.0-windows\Projekat.Properties.Resources.resources
+C:\Users\anjag\OneDrive\Desktop\skola\skolaSaStarog\DePicto\Projekat\Projekat\obj\Debug\net5.0-windows\Projekat.csprojAssemblyReference.cache
