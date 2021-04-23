@@ -21,10 +21,11 @@ namespace Projekat
         List<List<Point>> linije;
         List<int> koordinate;
         List<Action> undo;
-        //Form f2;
-        //TextBox t;
-        //Label label;
-        //bool pom;
+        int k1, k2; bool klik, m;
+        Form f2;
+        TextBox t;
+        Label label;
+        bool pom;
         public DePicto()
         {
             InitializeComponent();
@@ -33,8 +34,6 @@ namespace Projekat
 
         private void Inicijalizuj()
         {
-            //f2 = new Form();
-            //pom = false;
             g = pnlCrtanje.CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             numVelicina.Value = 3;
@@ -44,8 +43,12 @@ namespace Projekat
             linije = new List<List<Point>>();
             koordinate = new List<int>();
             x = -1; y = -1;
+            klik = false; m = false; k1 = -1; k2 = -1;
             undo = new List<Action>();
-            //t = new TextBox();
+            t = new TextBox();
+            label = new Label();
+            f2 = new Form();
+            pom = false;
         }
         private void pnlCrtanje_MouseDown(object sender, MouseEventArgs e)
         {
@@ -75,6 +78,7 @@ namespace Projekat
             y = -1;
             linije.Last().Add(e.Location);
             this.Invalidate();
+
         }
 
         private void pnlCrtanje_Paint(object sender, PaintEventArgs e)
@@ -128,9 +132,10 @@ namespace Projekat
                 this.Invalidate();
             }
         }
-
-        /*private void picTekst_Click(object sender, EventArgs e)
+        private void picTekst_Click(object sender, EventArgs e)
         {
+            m = true;
+            t = new TextBox();
             t.Location = new Point(20, 50);
             f2.Controls.Add(t);
             Button b = new Button();
@@ -140,7 +145,13 @@ namespace Projekat
             b.Location = new Point(20, 90);
             f2.Controls.Add(b);
             f2.Text = "Dodaj text";
-            f2.Show();
+            if (klik && k1!=-1 && k2 != -1)
+            {
+                f2.Show();
+                label.Location = new Point(k1, k2);
+                pnlCrtanje.Controls.Add(label);
+            }
+            klik = false;
         }
         private void b_Click(Object sender, EventArgs e)
         {
@@ -148,16 +159,15 @@ namespace Projekat
             if (t.Text != "")
             {
                 label.Text = t.Text;
-                label.Location = new Point(0, 0);
-                pnlCrtanje.Controls.Add(label);
-                label.BackColor = Color.Transparent;
-                label.MouseDown += new System.Windows.Forms.MouseEventHandler(label_MouseDown);
+                /*label.MouseDown += new System.Windows.Forms.MouseEventHandler(label_MouseDown);
                 label.MouseUp += new System.Windows.Forms.MouseEventHandler(label_MouseUp);
-                label.MouseMove += new System.Windows.Forms.MouseEventHandler(label_MouseMove);
+                label.MouseMove += new System.Windows.Forms.MouseEventHandler(label_MouseMove);*/
             }
             f2.Close();
+            f2 = new Form();
+            t = new TextBox();
         }
-        private void label_MouseDown(object sender, MouseEventArgs e)
+        /*private void label_MouseDown(object sender, MouseEventArgs e)
         {
             pom = true;
         }
@@ -169,11 +179,46 @@ namespace Projekat
 
         private void label_MouseMove(object sender, MouseEventArgs e)
         {
+            Label lab = (Label)sender;
             if (pom)
             {
-                label.Location = new Point(label.Location.X + e.Location.X, label.Location.Y + e.Location.Y);
+                lab.Location = new Point(lab.Location.X + e.Location.X, lab.Location.Y + e.Location.Y);
             }
         }*/
+
+        private void pnlCrtanje_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (m)
+            {
+                klik = true;
+                k1 = e.X;
+                k2 = e.Y;
+            }
+        }
+
+        public Color PickColor(Panel pnl, Point lokacija)
+        {
+            Bitmap bmp = new Bitmap(pnl.Width, pnl.Height);
+            pnl.DrawToBitmap(bmp, new Rectangle(0, 0, pnl.Width, pnl.Height));
+            Color col = bmp.GetPixel(lokacija.X, lokacija.Y);
+            MessageBox.Show(col.ToString());
+            bmp.Dispose();
+            return col;
+        }
+
+        private void picColorPick_Click(object sender, EventArgs e)
+        {
+            m = true;
+            if (klik && k1 != -1 && k2 != -1)
+            {
+                Point lok = new Point(k1, k2);
+                p.Color = PickColor(pnlCrtanje, lok);
+            }
+            klik = false;
+            k1 = -1;
+            k2 = -1;
+        }
+
         public void DrawAll(PaintEventArgs e)
         {
             foreach (var item in linije) {

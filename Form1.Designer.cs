@@ -47,6 +47,7 @@ namespace Projekat
             this.picClear = new System.Windows.Forms.PictureBox();
             this.picTekst = new System.Windows.Forms.PictureBox();
             this.picUndo = new System.Windows.Forms.PictureBox();
+            this.picColorPick = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picOlovka)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGumica)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVelicina)).BeginInit();
@@ -64,16 +65,18 @@ namespace Projekat
             ((System.ComponentModel.ISupportInitialize)(this.picClear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTekst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUndo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picColorPick)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlCrtanje
             // 
             this.pnlCrtanje.BackColor = System.Drawing.Color.White;
-            this.pnlCrtanje.Location = new System.Drawing.Point(2, 87);
+            this.pnlCrtanje.Location = new System.Drawing.Point(1, 88);
             this.pnlCrtanje.Name = "pnlCrtanje";
             this.pnlCrtanje.Size = new System.Drawing.Size(893, 439);
             this.pnlCrtanje.TabIndex = 0;
             this.pnlCrtanje.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCrtanje_Paint);
+            this.pnlCrtanje.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlCrtanje_MouseClick);
             this.pnlCrtanje.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlCrtanje_MouseDown);
             this.pnlCrtanje.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlCrtanje_MouseMove);
             this.pnlCrtanje.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlCrtanje_MouseUp);
@@ -249,6 +252,7 @@ namespace Projekat
             this.picTekst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picTekst.TabIndex = 16;
             this.picTekst.TabStop = false;
+            this.picTekst.Click += new System.EventHandler(this.picTekst_Click);
             // 
             // picUndo
             // 
@@ -261,12 +265,24 @@ namespace Projekat
             this.picUndo.TabStop = false;
             this.picUndo.Click += new System.EventHandler(this.picUndo_Click);
             // 
+            // picColorPick
+            // 
+            this.picColorPick.Image = global::Projekat.Properties.Resources.color_picker;
+            this.picColorPick.Location = new System.Drawing.Point(84, 42);
+            this.picColorPick.Name = "picColorPick";
+            this.picColorPick.Size = new System.Drawing.Size(36, 36);
+            this.picColorPick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picColorPick.TabIndex = 18;
+            this.picColorPick.TabStop = false;
+            this.picColorPick.Click += new System.EventHandler(this.picColorPick_Click);
+            // 
             // DePicto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(896, 527);
+            this.Controls.Add(this.picColorPick);
             this.Controls.Add(this.picUndo);
             this.Controls.Add(this.picTekst);
             this.Controls.Add(this.picClear);
@@ -304,6 +320,7 @@ namespace Projekat
             ((System.ComponentModel.ISupportInitialize)(this.picClear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTekst)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUndo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picColorPick)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -328,6 +345,7 @@ namespace Projekat
         private System.Windows.Forms.PictureBox picClear;
         private System.Windows.Forms.PictureBox picTekst;
         private System.Windows.Forms.PictureBox picUndo;
+        private System.Windows.Forms.PictureBox picColorPick;
     }
 }
 
