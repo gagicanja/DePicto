@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Projekat
 {
+    enum Mode { Linija, Elipsa, Pravougaonik }
     public partial class DePicto : Form
     {
         Graphics g;
@@ -25,7 +26,15 @@ namespace Projekat
         Form f2;
         TextBox t;
         Label label;
-        bool pom;
+        Mode mode;
+        Point p1;
+        Point p2;
+        List<Point> p1ListaL;
+        List<Point> p2ListaL;
+        List<Point> p1ListaE;
+        List<Point> p2ListaE;
+        List<Point> p1ListaP;
+        List<Point> p2ListaP;
         public DePicto()
         {
             InitializeComponent();
@@ -48,15 +57,26 @@ namespace Projekat
             t = new TextBox();
             label = new Label();
             f2 = new Form();
-            pom = false;
+            p1ListaL = new List<Point>();
+            p2ListaL = new List<Point>();
+            p1ListaE = new List<Point>();
+            p2ListaE = new List<Point>();
+            p1ListaP = new List<Point>();
+            p2ListaP = new List<Point>();
+            cmbOblici.SelectedIndex = 0;
+            mode = Mode.Linija;
         }
         private void pnlCrtanje_MouseDown(object sender, MouseEventArgs e)
         {
-            pomeranje = true;
-            x = e.X;
-            y = e.Y;
-            linije.Add(new List<Point>());
-            linije.Last().Add(e.Location);
+            if (!checkOblici.Checked)
+            {
+                pomeranje = true;
+                x = e.X;
+                y = e.Y;
+                linije.Add(new List<Point>());
+                linije.Last().Add(e.Location);
+            }
+            else p1 = new Point(e.X, e.Y);
         }
 
         private void pnlCrtanje_MouseMove(object sender, MouseEventArgs e)
@@ -73,14 +93,58 @@ namespace Projekat
 
         private void pnlCrtanje_MouseUp(object sender, MouseEventArgs e)
         {
-            pomeranje = false;
-            x = -1;
-            y = -1;
-            linije.Last().Add(e.Location);
-            this.Invalidate();
+            if (!checkOblici.Checked)
+            {
+                pomeranje = false;
+                x = -1;
+                y = -1;
+                if (linije.Count != 0)
+                {
+                    linije.Last().Add(e.Location);
+                }
+                this.Invalidate();
+            }
 
+            if (checkOblici.Checked)
+            {
+                p2 = new Point(e.X, e.Y);
+                if (mode == Mode.Linija)
+                {
+                    NacrtajLiniju(p1, p2);
+                }
+                if (mode == Mode.Elipsa)
+                {
+                    NacrtajElipsu(p1,p2);
+                }
+                if (mode == Mode.Pravougaonik)
+                {
+                    NacrtajPravougaonik(p1,p2);
+                }
+            }
         }
 
+        private void NacrtajLiniju(Point p1, Point p2)
+        {
+            g.DrawLine(p, p1, p2);
+            p1ListaL.Add(p1);
+            p2ListaL.Add(p2);
+        }
+
+        private void NacrtajElipsu(Point p1, Point p2)
+        {
+            Rectangle r = new Rectangle(Math.Min(p1.X, p2.X), Math.Min(p1.Y, p2.Y), Math.Abs(p1.X - p2.X), Math.Abs(p1.Y - p2.Y));
+            g.DrawEllipse(p, r);
+            p1ListaE.Add(p1);
+            p2ListaE.Add(p2);
+        }
+
+        private void NacrtajPravougaonik(Point p1, Point p2)
+        {
+            Rectangle r = new Rectangle(Math.Min(p1.X, p2.X), Math.Min(p1.Y, p2.Y), Math.Abs(p1.X - p2.X), Math.Abs(p1.Y - p2.Y));
+            g.DrawRectangle(p, r);
+            p1ListaP.Add(p1);
+            p2ListaP.Add(p2);
+        }
         private void pnlCrtanje_Paint(object sender, PaintEventArgs e)
         {
             DrawAll(e);
@@ -153,6 +217,28 @@ namespace Projekat
             }
             klik = false;
         }
+
+        private void checkOblici_CheckedChanged(object sender, EventArgs e)
+        {
+           
+        }
+        
+        private void cmbOblici_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbOblici.SelectedIndex == 0)
+            {
+                mode = Mode.Linija;
+            }
+            if(cmbOblici.SelectedIndex == 1)
+            {
+                mode = Mode.Elipsa;
+            }
+            if(cmbOblici.SelectedIndex == 2)
+            {
+                mode = Mode.Pravougaonik;
+            }
+        }
+
         private void b_Click(Object sender, EventArgs e)
         {
             label = new Label();
@@ -194,8 +280,9 @@ namespace Projekat
                 k1 = e.X;
                 k2 = e.Y;
             }
-        }
 
+        }
+        /*
         public Color PickColor(Panel pnl, Point lokacija)
         {
             Bitmap bmp = new Bitmap(pnl.Width, pnl.Height);
@@ -218,11 +305,25 @@ namespace Projekat
             k1 = -1;
             k2 = -1;
         }
-
+        */
         public void DrawAll(PaintEventArgs e)
         {
             foreach (var item in linije) {
                 e.Graphics.DrawLines(p, item.ToArray());
+            }
+            for (int i = 0; i < p1ListaL.Count; i++)
+            {
+                g.DrawLine(p, p1ListaL[i], p2ListaL[i]);
+            }
+            for (int i = 0; i < p1ListaE.Count; i++)
+            {
+                Rectangle r = new Rectangle(Math.Min(p1ListaE[i].X, p2ListaE[i].X), Math.Min(p1ListaE[i].Y, p2ListaE[i].Y), Math.Abs(p1ListaE[i].X - p2ListaE[i].X), Math.Abs(p1ListaE[i].Y - p2ListaE[i].Y));
+                g.DrawEllipse(p, r);
+            }
+            for (int i = 0; i < p1ListaP.Count; i++)
+            {
+                Rectangle r = new Rectangle(Math.Min(p1ListaP[i].X, p2ListaP[i].X), Math.Min(p1ListaP[i].Y, p2ListaP[i].Y), Math.Abs(p1ListaP[i].X - p2ListaP[i].X), Math.Abs(p1ListaP[i].Y - p2ListaP[i].Y));
+                g.DrawRectangle(p, r);
             }
         }
     }

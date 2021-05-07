@@ -48,6 +48,10 @@ namespace Projekat
             this.picTekst = new System.Windows.Forms.PictureBox();
             this.picUndo = new System.Windows.Forms.PictureBox();
             this.picColorPick = new System.Windows.Forms.PictureBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbOblici = new System.Windows.Forms.ComboBox();
+            this.checkOblici = new System.Windows.Forms.CheckBox();
+            this.pnlCrtanje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOlovka)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGumica)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVelicina)).BeginInit();
@@ -71,7 +75,8 @@ namespace Projekat
             // pnlCrtanje
             // 
             this.pnlCrtanje.BackColor = System.Drawing.Color.White;
-            this.pnlCrtanje.Location = new System.Drawing.Point(1, 88);
+            this.pnlCrtanje.Controls.Add(this.comboBox1);
+            this.pnlCrtanje.Location = new System.Drawing.Point(0, 84);
             this.pnlCrtanje.Name = "pnlCrtanje";
             this.pnlCrtanje.Size = new System.Drawing.Size(893, 439);
             this.pnlCrtanje.TabIndex = 0;
@@ -274,7 +279,38 @@ namespace Projekat
             this.picColorPick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picColorPick.TabIndex = 18;
             this.picColorPick.TabStop = false;
-            this.picColorPick.Click += new System.EventHandler(this.picColorPick_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(188, -197);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(151, 28);
+            this.comboBox1.TabIndex = 0;
+            // 
+            // cmbOblici
+            // 
+            this.cmbOblici.FormattingEnabled = true;
+            this.cmbOblici.Items.AddRange(new object[] {
+            "Linija",
+            "Elipsa",
+            "Pravougaonik"});
+            this.cmbOblici.Location = new System.Drawing.Point(202, 46);
+            this.cmbOblici.Name = "cmbOblici";
+            this.cmbOblici.Size = new System.Drawing.Size(123, 28);
+            this.cmbOblici.TabIndex = 20;
+            this.cmbOblici.SelectedIndexChanged += new System.EventHandler(this.cmbOblici_SelectedIndexChanged);
+            // 
+            // checkOblici
+            // 
+            this.checkOblici.AutoSize = true;
+            this.checkOblici.Location = new System.Drawing.Point(126, 50);
+            this.checkOblici.Name = "checkOblici";
+            this.checkOblici.Size = new System.Drawing.Size(70, 24);
+            this.checkOblici.TabIndex = 21;
+            this.checkOblici.Text = "Oblici";
+            this.checkOblici.UseVisualStyleBackColor = true;
+            this.checkOblici.CheckedChanged += new System.EventHandler(this.checkOblici_CheckedChanged);
             // 
             // DePicto
             // 
@@ -282,6 +318,8 @@ namespace Projekat
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(896, 527);
+            this.Controls.Add(this.checkOblici);
+            this.Controls.Add(this.cmbOblici);
             this.Controls.Add(this.picColorPick);
             this.Controls.Add(this.picUndo);
             this.Controls.Add(this.picTekst);
@@ -303,6 +341,7 @@ namespace Projekat
             this.Controls.Add(this.pnlCrtanje);
             this.Name = "DePicto";
             this.Text = "DePicto";
+            this.pnlCrtanje.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picOlovka)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGumica)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVelicina)).EndInit();
@@ -322,6 +361,7 @@ namespace Projekat
             ((System.ComponentModel.ISupportInitialize)(this.picUndo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picColorPick)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -346,6 +386,9 @@ namespace Projekat
         private System.Windows.Forms.PictureBox picTekst;
         private System.Windows.Forms.PictureBox picUndo;
         private System.Windows.Forms.PictureBox picColorPick;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbOblici;
+        private System.Windows.Forms.CheckBox checkOblici;
     }
 }
 
