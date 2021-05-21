@@ -29,7 +29,9 @@ namespace Projekat
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DePicto));
             this.pnlCrtanje = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.picOlovka = new System.Windows.Forms.PictureBox();
             this.picGumica = new System.Windows.Forms.PictureBox();
             this.numVelicina = new System.Windows.Forms.NumericUpDown();
@@ -48,9 +50,10 @@ namespace Projekat
             this.picTekst = new System.Windows.Forms.PictureBox();
             this.picUndo = new System.Windows.Forms.PictureBox();
             this.picColorPick = new System.Windows.Forms.PictureBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.cmbOblici = new System.Windows.Forms.ComboBox();
             this.checkOblici = new System.Windows.Forms.CheckBox();
+            this.picSave = new System.Windows.Forms.PictureBox();
+            this.checkNew = new System.Windows.Forms.CheckBox();
             this.pnlCrtanje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOlovka)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGumica)).BeginInit();
@@ -70,6 +73,7 @@ namespace Projekat
             ((System.ComponentModel.ISupportInitialize)(this.picTekst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUndo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picColorPick)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSave)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlCrtanje
@@ -85,6 +89,14 @@ namespace Projekat
             this.pnlCrtanje.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlCrtanje_MouseDown);
             this.pnlCrtanje.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlCrtanje_MouseMove);
             this.pnlCrtanje.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlCrtanje_MouseUp);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(188, -197);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(151, 28);
+            this.comboBox1.TabIndex = 0;
             // 
             // picOlovka
             // 
@@ -279,14 +291,7 @@ namespace Projekat
             this.picColorPick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picColorPick.TabIndex = 18;
             this.picColorPick.TabStop = false;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(188, -197);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(151, 28);
-            this.comboBox1.TabIndex = 0;
+            this.picColorPick.Click += new System.EventHandler(this.picColorPick_Click);
             // 
             // cmbOblici
             // 
@@ -312,12 +317,35 @@ namespace Projekat
             this.checkOblici.UseVisualStyleBackColor = true;
             this.checkOblici.CheckedChanged += new System.EventHandler(this.checkOblici_CheckedChanged);
             // 
+            // picSave
+            // 
+            this.picSave.Image = ((System.Drawing.Image)(resources.GetObject("picSave.Image")));
+            this.picSave.Location = new System.Drawing.Point(857, 0);
+            this.picSave.Name = "picSave";
+            this.picSave.Size = new System.Drawing.Size(36, 36);
+            this.picSave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSave.TabIndex = 22;
+            this.picSave.TabStop = false;
+            this.picSave.Click += new System.EventHandler(this.picSave_Click);
+            // 
+            // checkNew
+            // 
+            this.checkNew.AutoSize = true;
+            this.checkNew.Location = new System.Drawing.Point(790, 9);
+            this.checkNew.Name = "checkNew";
+            this.checkNew.Size = new System.Drawing.Size(61, 24);
+            this.checkNew.TabIndex = 1;
+            this.checkNew.Text = "New";
+            this.checkNew.UseVisualStyleBackColor = true;
+            // 
             // DePicto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(896, 527);
+            this.Controls.Add(this.checkNew);
+            this.Controls.Add(this.picSave);
             this.Controls.Add(this.checkOblici);
             this.Controls.Add(this.cmbOblici);
             this.Controls.Add(this.picColorPick);
@@ -360,6 +388,7 @@ namespace Projekat
             ((System.ComponentModel.ISupportInitialize)(this.picTekst)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUndo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picColorPick)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSave)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -389,6 +418,8 @@ namespace Projekat
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox cmbOblici;
         private System.Windows.Forms.CheckBox checkOblici;
+        private System.Windows.Forms.PictureBox picSave;
+        private System.Windows.Forms.CheckBox checkNew;
     }
 }
 
