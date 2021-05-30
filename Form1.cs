@@ -60,6 +60,7 @@ namespace Projekat
             checkNew.Checked = true;
             prvi = false;
             names = new List<string>();
+            f2 = new Form();
             t = new TextBox();
             label = new Label();
             p1ListaL = new List<Point>();
@@ -184,6 +185,7 @@ namespace Projekat
         private void picClear_Click(object sender, EventArgs e)
         {
             g.Clear(pnlCrtanje.BackColor);
+            Inicijalizuj();
         }
 
         private void picUndo_Click(object sender, EventArgs e)
